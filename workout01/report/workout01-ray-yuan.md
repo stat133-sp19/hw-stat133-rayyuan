@@ -30,13 +30,14 @@ gsw_shot_data <- read.csv("../data/shots-data.csv", stringsAsFactors = FALSE)
 two_pt_data <- gsw_shot_data[gsw_shot_data$shot_type == "2PT Field Goal",]
 three_pt_data <- gsw_shot_data[gsw_shot_data$shot_type == "3PT Field Goal",]
 
-
 grouped_2pt_data <- group_by(two_pt_data, name)
-twopt_effective <- arrange(summarise(grouped_2pt_data, total = n(), made = sum(shot_made_flag == "shot_yes"), percentage = made/total), desc(percentage))
+twopt_effective <- arrange(summarise(grouped_2pt_data, total = n(), made = sum(shot_made_flag == "shot_yes"), percentage = made/total),desc(percentage))
+
 grouped_3pt_data <- group_by(three_pt_data, name)
-threept_effective <- arrange(summarise(grouped_3pt_data, total = n(), made = sum(shot_made_flag == "shot_yes"), percentage = made/total), desc(percentage))
+threept_effective <- arrange(summarise(grouped_3pt_data, total = n(), made = sum(shot_made_flag == "shot_yes"), percentage=made/total),desc(percentage))
+
 grouped_shot_data <- group_by(gsw_shot_data, name)
-total_effective <- arrange(summarise(grouped_shot_data, total = n(), made = sum(shot_made_flag == "shot_yes"), percentage = made/total), desc(percentage))
+total_effective <- arrange(summarise(grouped_shot_data, total = n(), made = sum(shot_made_flag == "shot_yes"), percentage =made/total),desc(percentage))
 ```
 
 Shooting Percentage Tables
