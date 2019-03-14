@@ -94,7 +94,21 @@ Below are the 5 shot charts for each of the 5 players. Each dot represents a spo
 
 From these player shot charts, it is immediately apparent that Steph, Klay, and Durant take the most shots on the team. Also, you can also see generally that Klay and Steph do not have huge differences in 3-point and 2-point field goal attempts, which supports our analysis from the table section above. Also, Steph has the most shots from a much larger range, as seen by a good amount of shots made from around 40-feet. It is also a general trend that a lot of the players make more shots than they miss under the basket, which makes sense since you are much closer to the hoop. Also, Durant, Steph, and Klay cover the widest area with the shots that they take. They take shots from almost everywhere in the 2-point field goal range. Contrast that with Draymond, you see that he either takes 3-point field goals, or takes shots around the basket, and doesn't take many mid range jump shots. We can also see from the shot charts, that Iguodala has a little more area difference in the location of shots that he takes than Draymond, but that he also takes significantly less than anyone else in the starting 5, which was also supported by our table analysis. Another trend we can see, is that Steph generally makes more 2 point field goals on the left side of the court as opposed to the right side, whereas Durant and Klay's 2-point field goal accuracy is generally homogenous throughout the entire 2-point field goal area. Also, we can see that most of Draymond's 3-point field goals are around the center of the 3-point line, whereas Steph and Klay take threes from all around the 3-point line. However, Steph does make make more shots around the center of the 3-point line to the wing.
 
-Take-home Message
------------------
+Conclusion
+----------
 
 In conclusion, we can clearly take away that Steph, Klay, and Durant take the most shots of the five players, while Iguodala takes by far the least. We also know that Steph and Klay do not take many more 2-point field goals than 3-point field goals, and they are the most effective 3-point shooters, but not as relatively effective from 2-point range. Also, Draymond is statistically the least effective shooter of the five players. With regards to shot charts and locations of shooting, Draymond and Iguodala take much more generally 'discrete' locations of the their shots, i.e either at the 3-point line or around the basket. Steph, Klay, and Durant, however, take shots from nearly every location in the 2-point range and 3-point line, and since they are generally effective shooters, this probably contributes to why they score so many points for the Golden State Warriors.
+
+Take Home Message
+-----------------
+
+The Golden State Warriors 5 players main shotmakers are Steph, Klay, and Durant, and Steph and Klay are the primary 3-point shooters. Andre Iguodala is actually relatively very effective even though he doesn't take as many shots, and Draymond is not that effective of a shooter relatively.
+
+References
+----------
+
+1.<https://www.google.com/search?q=golden+state+warriors+2016+picture&source=lnms&tbm=isch&sa=X&ved=0ahUKEwjG2cXQhIHhAhUSvJ4KHcRqBfsQ_AUIDygC&biw=1522&bih=706#imgdii=JOvyga_txYS9AM>:&imgrc=vxq6rBx7bv52MM:
+
+2.<https://bleacherreport.com/articles/2749739-5-wild-stats-defining-golden-state-warriors-season>
+
+3.<https://www.nba.com/article/2017/12/14/one-team-one-stat-warriors-shooting-better-ever>
