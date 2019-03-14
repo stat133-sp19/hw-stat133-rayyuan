@@ -37,7 +37,10 @@ grouped_shot_data <- group_by(gsw_shot_data, name)
 total_effective <- arrange(summarise(grouped_shot_data, total = n(), made = sum(shot_made_flag == "shot_yes"), percentage = made/total), desc(percentage))
 ```
 
-### Shooting percentage tables
+Shooting Percentage Tables
+--------------------------
+
+### 2-Point Field Goal Effective Shooting Percentages
 
 | name           |  total|  made|  percentage|
 |:---------------|------:|-----:|-----------:|
@@ -47,6 +50,8 @@ total_effective <- arrange(summarise(grouped_shot_data, total = n(), made = sum(
 | Klay Thompson  |    640|   329|   0.5140625|
 | Draymond Green |    346|   171|   0.4942197|
 
+### 3-Point Field Goal Effective Shooting Percentages
+
 | name           |  total|  made|  percentage|
 |:---------------|------:|-----:|-----------:|
 | Klay Thompson  |    580|   246|   0.4241379|
@@ -55,6 +60,8 @@ total_effective <- arrange(summarise(grouped_shot_data, total = n(), made = sum(
 | Andre Iguodala |    161|    58|   0.3602484|
 | Draymond Green |    232|    74|   0.3189655|
 
+### Total Field Goal Effective Shooting Percentages
+
 | name           |  total|  made|  percentage|
 |:---------------|------:|-----:|-----------:|
 | Kevin Durant   |    915|   495|   0.5409836|
@@ -62,4 +69,24 @@ total_effective <- arrange(summarise(grouped_shot_data, total = n(), made = sum(
 | Klay Thompson  |   1220|   575|   0.4713115|
 | Stephen Curry  |   1250|   584|   0.4672000|
 | Draymond Green |    578|   245|   0.4238754|
-| Below          |       |      |            |
+
+#### Analysis On the Tables
+
+Something to notice immediately is that the amount of shots Stephen Curry, Kevin Durant, and Klay Thompson take is significantly more than the other two players. This is why we must look at percentages to identify effectiveness and efficiency, since even though those 3 score the most amount of points, their shooting percentages are not all above the other 2 players. In terms of 2-point field goal effectiveness, Andre Iguodala has the highest field goal percentage. However, he has the second lowest 3-point percentage. Looking at his percentages, other teams could take advantage of the fact that his accuracy from 3 is not really a threat. This would pose somewhat of a problem, since Andre Iguodala is a small forward, and in the NBA, small forwards these days are starting to really be a threat from 3-point range and space out the defense. However, if Iguodala is only effective from 2-point range, teams can pack the paint and thus make it harder for the rest of his team to score 2-point field goals. However, to be fair, his 3-point percentage is only relatively lower than his teammates, but his teammates are extremeley proficient 3-point shooters.
+
+Looking at Draymond Green's stats, it is clear that he is the least effective player in this lineup, being 5th in 2-point, 3-point, and overall shooting percentage. In terms of scoring potential, Green and Iguodala play generally the same position, but Iguodala is clearly more effective. We also see that Iguodala takes significantly less shots than Green, so the GSW could potentially involve Iguodala in more plays to see if his percentages can hold up.
+
+Overall, Steph Curry and Klay Thompson take the most shots on their team, and unlike the other three players, their number of 3-point field goal attempts and 2-point field goal attempts are actually almost the same. Thus, by being effective shooting from both ranges, they effectively spread out the defense. Their other teammates take significantly more 2-point field goals than 3-point field goals, which is actually the norm among basketball players in the NBA. Steph and Klay are called the "Splash Brothers" for a reason. Since they take much more 3 pointers than anyone on their team, their overall shooting percentage might be slightly misleading. Since 3 pointers are objectively harder than 2 pointers, their percentages have the potential to be higher if they adjusted the ratio of their 3 point to 2 point field goal attempts. It is also clear to see that Klay and Steph are the most effective 3-point shooters, with Klay having a slightly higher shooting average. Analyzing deeper, this small difference could be attributed to their playstyles. Steph Curry is the point guard and a playmaker, and a lot of 3 pointers he takes are from shots he created for himself, which makes it harder since he needs to create his own space and those shots are usually heavily contested. However, Klay is not as skilled in that aspect, and many times plays are called for him where screens are set and he catch-and-shoots open threes. This could be a factor in their difference in shooting percentages. It is also interesting to note, that relative to his teammates, Klay has the highest percentage for 3-point field goals, but the second lowest for 2-point field goals.
+
+With regards to Kevin Durant, he is second in effectiveness in 2-point field goals, and third in 3-point field goals. He also takes the third most amount of shots on his team. Looking at his overall scoring effectiveness, he is the most effective, which makes sense based on his performance throughout the season.
+
+Shot Chart Visualizations
+-------------------------
+
+Below are the 5 shot charts for each of the 5 players. Each dot represents a spot where a player took a shot.
+
+<img src="../images/gsw-shot-charts.png" width="80%" style="display: block; margin: auto;" />
+
+### Analysis of Shot Charts
+
+From these player shot charts, it is immediately apparent that Steph, Klay, and Durant take the most shots on the team. Also, you can also see generally that Klay and Steph do not have huge differences in 3-point and 2-point field goal attempts, which supports our analysis from the table section above. Also, Steph has the most shots from a much larger range, as seen by a good amount of shots made from around 40-feet. It is also a general trend that a lot of the players make more shots than they miss under the basket, which makes sense since you are much closer to the hoop. Also, Durant, Steph, and Klay cover the widest area with the shots that they take. They take shots from almost everywhere in the 2-point field goal range. Contrast that with Draymond, you see that he either takes 3-point field goals, or takes shots around the basket, and doesn't take many mid range jump shots. We can also see from the shot charts, that Iguodala has a little more area difference in the location of shots that he takes than Draymond, but that he also takes significantly less than anyone else in the starting 5, which was also supported by our table analysis. Another trend we can see, is that Steph generally makes more 2 point field goals on the left side of the court as opposed to the right side, whereas Durant and Klay's 2-point field goal accuracy is generally homogenous throughout the entire 2-point field goal area. Also, we can see that most of Draymond's 3-point field goals are around the center of the 3-point line, whereas Steph and Klay take threes from all around the 3-point line. However, Steph does make make more shots around the center of the 3-point line to the wing.

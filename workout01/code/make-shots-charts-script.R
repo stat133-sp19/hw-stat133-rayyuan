@@ -1,3 +1,10 @@
+##################################################
+## title:Shot Charts
+## description: Creating the visualization shot charts for each of the 5 players
+## inputs: shots-data.csv,nba-court.jpg, curry df, thompson df, durant df, iguodala df, green df
+## outputs:klay-thompson-shot-chart.pdf,stephen-curry-shot-chart.pdf,kevin-durant-shot-chart.pdf,andre-iguodala-shot-chart.pdf,draymond-gree-shot-chart.pdf,
+##         gsw-shot-charts.pdf,gsw-shot-charts.png
+##################################################
 library(ggplot2)
 library(grid)
 library(jpeg)
