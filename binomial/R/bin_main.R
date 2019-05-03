@@ -1,32 +1,29 @@
 #' @title Binomial Choose
-#' @description Calculates number of combinations in which k successes can occur in n trials.
-#' @param n Number of trials (numeric)
-#' @param k Number of successes (numeric)
-#' @return Number of combinations (numeric)
+#' @description how many groups of size k can be chosen from a total of n
+#' @param n num total to chose from (numeric)
+#' @param k num to choose (numeric)
+#' @return num groups of size k (numeric)
 #' @export
 #' @examples
 #' bin_choose(n = 5, k = 2)
 #' 10
 #'
-#' bin_choose(5, 0)
-#' 1
-#'
 #' bin_choose(5, 1:3)
 #' 5 10 10
 bin_choose <- function(n, k) {
   if (sum(k > n) > 0) {
-    stop("k cannot be larger than n")
+    stop("can't choose more than n")
   }
-  return(factorial(n) / (factorial(k) * factorial(n-k)))
+  return(factorial(n)/ (factorial(k) * factorial(n-k)))
 }
 
 
 #' @title Binomial Probability
-#' @description Returns the probability of having a certain number of successes in a given number of trials, with a given probability of success for each trial.
+#' @description Gives probability of num success in num trials with a given probability of success
 #' @param success Vector of successes (numeric)
-#' @param trials Number of trials (numeric)
-#' @param prob Probability of successs (real)
-#' @return Probability of the number of successes (real)
+#' @param trials num trials (numeric)
+#' @param prob set probability that there is a success (real)
+#' @return probability of num success in num trials with a given probability of success (real)
 #' @export
 #' @examples
 #' bin_probability(success = 2, trials = 5, prob = 0.5)
@@ -46,10 +43,10 @@ bin_probability <- function(success, trials, prob) {
 }
 
 #' @title Binomial Distribution
-#' @description Computes the binomial distribution of a certain number of success over a given number of trials
-#' @param trials Number of trials (numeric)
-#' @param prob Probability of successs (real)
-#' @return Returns a data.frame of the number of successes and their probabilities
+#' @description gives binomial distribution of probabilities of all possible success given a probability of success for 1 trial
+#' @param trials num trials (numeric)
+#' @param prob probability of successs (real)
+#' @return data fram of all possible success given a probability of success(data.frame)
 #' @export
 #' @examples
 #' x <- bin_distribution(trials = 5, prob = 0.5)
@@ -62,17 +59,15 @@ bin_probability <- function(success, trials, prob) {
 #' 5 4 0.15625
 #' 6 5 0.03125
 #'
-#' plot(x)
-#' Returns a barplot of the distribution
-#'
+
 bin_distribution <- function(trials, prob) {
-  probabilities <- c()
-  for (i in 0:trials) {
-    probabilities <- c(probabilities, bin_probability(i, trials, prob))
+  succ_probs <- c()
+  for (t in 0:trials) {
+    succ_probs <- c(succ_probs, bin_probability(t, trials, prob))
   }
-  object <- data.frame(success = 0:trials, probability = probabilities)
-  class(object) <- c("bindis", "data.frame")
-  object
+  ret <- data.frame(success = 0:trials, probability = succ_probs)
+  class(ret) <- c("bindis", "data.frame")
+  return(ret)
 }
 
 
@@ -82,11 +77,11 @@ plot.bindis <- function(dis) {
 }
 
 
-#' @title Binomial Cumulative
-#' @description Computes the binomial distribution of a certain number of success over a given number of trials as well as the cumulative probability up to that number of successes
-#' @param trials Number of trials (numeric)
-#' @param prob Probability of successs (real)
-#' @return Returns a data.frame of the number of successes and their probabilities as well as the cumulative probability up to a certain number of successes
+#' @title Binomial Cumulative Distribution
+#' @description Gets cumulative probability of all num success in num trials with a given probability of success up to that specific success number
+#' @param trials num trials (numeric)
+#' @param prob given probability a success occurs (real)
+#' @return dataframe of cumulative probability of all num success in num trials with a given probability of success up to that specific success number(data.frame)
 #' @export
 #' @examples
 #' dis2 <- bin_cumulative(trials = 5, prob = 0.5)
@@ -98,21 +93,20 @@ plot.bindis <- function(dis) {
 #' 4       3     0.31250    0.81250
 #' 5       4     0.15625    0.96875
 #' 6       5     0.03125    1.00000
-#'
-#' plot(dis2)
-#' Returns a plot of the cumulative probability versus number of successess
+
+
 bin_cumulative <- function(trials, prob) {
-  distribution <- bin_distribution(trials, prob)
-  probabilities <- distribution$probability
-  cumulatives <- c()
-  sum <- 0
-  for (i in 1:length(probabilities)) {
-    sum <- sum + probabilities[i]
-    cumulatives <- c(cumulatives, sum)
+  count <- 0
+  orig_dist <- bin_distribution(trials, prob)
+  reg_probs <- bin_distribution(trials, prob)$probability
+  cum_probs <- c()
+  for (t in 1:length(reg_probs)) {
+    cum_probs <- c(cum_probs, count + reg_probs[t])
+    count <- count + reg_probs[t]
   }
-  distribution$cumulative <- cumulatives
-  class(distribution) <- c("bincum", "data.frame")
-  distribution
+  orig_dist$cumulative <- cum_probs
+  class(orig_dist) <- c("bincum", "data.frame")
+  return(orig_dist)
 }
 
 #' @export
@@ -123,10 +117,10 @@ plot.bincum <- function(dist) {
 
 
 #' @title Binomial Variable
-#' @description An object which represents a binomial random variable
-#' @param trials Number of trials (numeric)
+#' @description A Binomial Random Variable s3 object
+#' @param trials num (numeric)
 #' @param prob Probability of successs (real)
-#' @return Binomial Random Variable object
+#' @return Binomial Random Variable object(binvar)
 #' @export
 #' @examples
 #' bin1 <- bin_variable(trials = 10, p = 0.3)
@@ -158,51 +152,43 @@ bin_variable <- function(trials, prob) {
 }
 
 #' @export
-print.binvar <- function(object) {
-  print("Binomial Variable")
-  print("")
+print.binvar <- function(bvobj) {
+  cat("Binomial Variable\n")
   print("Parameters")
-  print(paste0("Number of trials: ", object[[1]]))
-  print(paste0("Probability of Success: ", object[[2]]))
+  print(paste0("Number of trials: ", bvobj[[1]]))
+  print(paste0("Probability of Success: ", bvobj[[2]]))
 }
 
 
 #' @export
-summary.binvar <- function(binvar) {
-  num_trials = binvar[[1]]
-  probability = binvar[[2]]
-  object <- list(trials = num_trials,
-                 prob = probability,
-                 mean = aux_mean(num_trials, probability),
-                 variance = aux_variance(num_trials, probability),
-                 mode = aux_mode(num_trials, probability),
-                 skewness = aux_skewness(num_trials, probability),
-                 kurtosis = aux_kurtosis(num_trials, probability))
+summary.binvar <- function(bvobj) {
+  num_trials = bvobj[[1]]
+  probability = bvobj[[2]]
+  object <- list(trials = num_trials,prob = probability,mean = aux_mean(num_trials, probability),variance = aux_variance(num_trials, probability),mode = aux_mode(num_trials, probability),skewness = aux_skewness(num_trials, probability),kurtosis = aux_kurtosis(num_trials, probability))
   class(object) <- "summary.binvar"
   object
 }
 
 #' @export
-print.summary.binvar <- function(summary) {
-  print("Summary Binomial")
-  print("")
+print.summary.binvar <- function(s) {
+  cat("Summary Binomial\n")
   print("Parameters")
-  print(paste0("Number of trials: ", summary[['trials']]))
-  print(paste0("Probability of Success: ", summary[['prob']]))
-  print("")
+  print(paste0("Number of trials: ", s[['trials']]))
+  print(paste0("Probability of Success: ", s[['prob']]))
+  cat("\n")
   print("Measures")
-  print(paste0("Mean: ", summary[['mean']]))
-  print(paste0("Variance: ", summary[['variance']]))
-  print(paste0("Mode: ", summary[['mode']]))
-  print(paste0("Skewness: ", summary[['skewness']]))
-  print(paste0("Kurtosis: ", summary[['kurtosis']]))
+  print(paste0("Mean: ", s[['mean']]))
+  print(paste0("Variance: ", s[['variance']]))
+  print(paste0("Mode: ", s[['mode']]))
+  print(paste0("Skewness: ", s[['skewness']]))
+  print(paste0("Kurtosis: ", s[['kurtosis']]))
 }
 
 #' @title Binomial Mean
-#' @description Computes the mean of a binomial distribution
-#' @param trials Number of trials (real)
-#' @param prob Probability of successs (real)
-#' @return Returns the mean
+#' @description mean of binomial distributions
+#' @param trials num trials (numeric)
+#' @param prob given probability of success (real)
+#' @return Returns the mean(real)
 #' @export
 #' @examples
 #' bin_mean(10, 0.3)
@@ -214,10 +200,10 @@ bin_mean <- function(trials, prob) {
 }
 
 #' @title Binomial Variance
-#' @description Computes the variance of a binomial distribution
-#' @param trials Number of trials (real)
-#' @param prob Probability of successs (real)
-#' @return Returns the variance
+#' @description variance of a binomial distribution
+#' @param trials num trials (numeric)
+#' @param prob given probability of success (real)
+#' @return Returns the variance(real)
 #' @export
 #' @examples
 #' bin_variance(10, 0.3)
@@ -229,10 +215,10 @@ bin_variance <- function(trials, prob) {
 }
 
 #' @title Binomial Mode
-#' @description Computes the mode of a binomial distribution
-#' @param trials Number of trials (real)
-#' @param prob Probability of successs (real)
-#' @return Returns the mode
+#' @description mode of a binomial distribution
+#' @param trials num trials (numeric)
+#' @param prob given probability of success (real)
+#' @return Returns the mode(numeric)
 #' @export
 #' @examples
 #' bin_mode(10, 0.3)
@@ -244,10 +230,10 @@ bin_mode <- function(trials, prob) {
 }
 
 #' @title Binomial Skewness
-#' @description Computes the skewness of a binomial distribution
-#' @param trials Number of trials (real)
-#' @param prob Probability of successs (real)
-#' @return Returns the skewness
+#' @description skewness of a binomial distribution
+#' @param trials num trials (numeric)
+#' @param prob given probability of success (real)
+#' @return Returns the skewness(real)
 #' @export
 #' @examples
 #' bin_skewness(10, 0.3)
@@ -259,10 +245,10 @@ bin_skewness <- function(trials, prob) {
 }
 
 #' @title Binomial Kurtosis
-#' @description Computes the kurtosis of a binomial distribution
-#' @param trials Number of trials (real)
-#' @param prob Probability of successs (real)
-#' @return Returns the kurtosis
+#' @description kurtosis of a binomial distribution
+#' @param trials num trials (numeric)
+#' @param prob given probability of success (real)
+#' @return Returns the kurtosis(real)
 #' @export
 #' @examples
 #' bin_kurtosis(10, 0.3)
