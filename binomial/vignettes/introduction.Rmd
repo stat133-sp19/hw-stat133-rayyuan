@@ -1,0 +1,135 @@
+---
+title: "Getting Started with binomial"
+author: "Ray Yuan"
+date: "5/3/2019"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{introduction}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+```{r, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>",
+  error = TRUE
+)
+```
+
+```{r setup}
+library(binomial)
+```
+## Binomial
+
+This binomial package is designed to simulate binomial random variables and provide statistics and visualizations for success rates given a number of trials and probability of success. 
+
+## Creation of Binomial Random Variable Objects
+A simple way to view basic statistics about a binomial random variable distribution is to create an instance of a binomial random variable object (`bin_variable`) and then simply print out that object. 
+
+We define a binomial random variable as `bin_variable(trials, probability of success)`:
+```{r}
+rv <- bin_variable(10, 0.3)
+```
+
+If we print out the binomial random variable object, we see its input trials and probability of success:
+```{r}
+rv
+```
+
+We can see useful statistics about a random variable's distribution by using the `summary()` function
+```{r}
+rv_summary <- summary(rv)
+rv_summary
+```
+
+## Distributions of Binomial Random Variables
+We can also create probability of success distributions using the functions `bin_distribution` and `bin_cumulative`, which return `bindis` and `bindcum` objects respectively. 
+
+#### bin_distribution
+We create a `bindis` object representing a distribution of a binomial random variable using the function `bin_distribution(trials, probability of success)`:
+```{r}
+dis <- bin_distribution(5, 0.3)
+class(dis)
+```
+
+Printing out a binomial distribution prints a `data.frame` of the distribution:
+```{r}
+dis
+```
+
+We can plot this binomial distribution using the `plot()` function:
+```{r, fig.show='hold'}
+plot(dis)
+```
+
+#### bin_cumulative
+In addition to creating the probability of success distributions, we can also create a distribution that calculates the probability of having less than or equal to a number of successes using `bin_cumulative`.
+
+We create a `bincum` object using the function `bin_cumulative(trials, probability of success)`
+```{r}
+dis2 <- bin_cumulative(5, 0.3)
+class(dis2)
+```
+
+Printing out the distribution prints a `data.frame` of the distribution:
+```{r}
+dis2
+```
+
+We can plot the running success probability of this binomial distribution using the `plot()` function:
+```{r, fig.show='hold'}
+plot(dis2)
+```
+
+## Other Binomial Random Variable Functions
+
+#### bin_choose
+Function that returns n choose k. `bin_choose(n, k)`:
+```{r}
+bin_choose(5, 2)
+bin_choose(5, 1:5)
+bin_choose(5, 6)
+```
+
+#### bin_probability
+Function that returns the probability of achieving a certain number of successes in a binomial random variable. `bin_probability(number of successes, trials, probability of success)`
+```{r}
+bin_probability(success = 2, trials = 5, prob = 0.5)
+bin_probability(success = 0:2, trials = 5, prob = 0.5)
+bin_probability(success = 6, trials = 5, prob = 0.5)
+bin_probability(success = 0:5 , trials = 5, prob = 0.5)
+```
+
+## Summary Measure Functions
+The package also includes a numerous number of summary measure functions which give individual statistics about a binomial random variable.
+
+#### bin_mean
+Returns the mean of a binomial random variable
+```{r}
+bin_mean(10, 0.3)
+```
+
+#### bin_variance
+Returns the variance of a binomial random variable
+```{r}
+bin_variance(10, 0.3)
+```
+
+#### bin_mode
+Returns the mode of a binomial random variable
+```{r}
+bin_mode(10, 0.3)
+```
+
+#### bin_skewness
+Returns the skewness of a binomial random variable
+```{r}
+bin_skewness(10, 0.3)
+```
+
+#### bin_kurtosis
+Returns the kurtosis of a binomial random variable
+```{r}
+bin_kurtosis(10, 0.3)
+```
