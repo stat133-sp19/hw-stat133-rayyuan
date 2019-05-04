@@ -1,4 +1,4 @@
-context("Test Checker Functions")
+context("Tests for the check functions")
 
 test_that("testing check_prob", {
   expect_true(check_prob(0.5))
