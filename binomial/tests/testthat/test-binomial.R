@@ -2,7 +2,7 @@ context("Test Binomial Functions")
 
 test_that("testing bin choose", {
   expect_equal(bin_choose(5,2), 10)
-  expect_equal(bin_choose(10,2), 45)
+
   expect_equal(bin_choose(5, 1:5), c(5, 10, 10,  5,  1))
   expect_error(bin_choose(5,6))
   expect_error(bin_choose(5, 1:6))

@@ -2,12 +2,12 @@ context("Test Summary Measures")
 
 test_that("testing aux mean", {
   expect_equal(aux_mean(10, 0.3), 3)
-  expect_equal(length(aux_mean(50, 0.3)), 1)
-  expect_equal(aux_mean(10, 0.3), aux_mean(5, 0.6))
+  expect_equal(aux_mean(100,0.3),30)
+  expect_equal(aux_mean(0,5),0)
 })
 
 test_that("testing aux variance", {
-  expect_equal(length(aux_variance(50, 0.3)), 1)
+  expect_equal(length(aux_variance(30, 0.3)), 6.3)
   expect_equal(aux_variance(10, 0.3), 2.1)
   expect_equal(aux_variance(20, 0.3), 4.2)
 })
